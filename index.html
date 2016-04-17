@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Student Portal</title>
+  <meta name="description" content="">
+  <meta name="author" content="Olivia Pinon Fischer">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="stylesheet" href="libraries/frameworks/Revealjs/css/reveal.min.css">
+  <link rel="stylesheet" href="libraries/frameworks/Revealjs/css/theme/default.css" id="theme">
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" id="theme">
+  <!--[if lt IE 9]>
+  <script src="lib/js/html5shiv.js"></script>
+  <![endif]-->  <link rel="stylesheet" href = "assets/css/ribbons.css">
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section class='' data-state='' id='slide-1'>
+  <h1>Student Portal</h1>
+  <h3>Coursera - Developping Data Products Project</h3>
+
+<p>Created by Olivia Pinon Fischer</p>
+
+</section>
+<section class='' data-state='' id='slide-2'>
+  <h2>Description</h2>
+  <p>This app is for searching, visualizing and sorting through student records. 
+The dataset is notional and includes last and first names of the students, the programs they&#39;re in (Doctorate, Doctorate Presidential, MSc), and their GPA. 
+The app provides the user with the capability to visualize students based on the program the students are enrolled in. After the user decided on which program to visualize, the app updates the table, histogram of GPAs and summary table, accordingly.</p>
+
+</section>
+<section class='' data-state='' id='slide-3'>
+  <h2>The App</h2>
+  <p><a href="https://oliviapinonfischer.shinyapps.io/myApp/">Here</a> is the app.</p>
+
+<p><img src="StudentPortal.png" alt="width"></p>
+
+</section>
+<section class='' data-state='' id='slide-4'>
+  <h2>User Interaction</h2>
+  <p>In this very simple dashboard, the user interact with the data through a dropdown menu listing the different programs the students are enrolled in.
+He&#39;s provided with three options</p>
+
+<ul>
+<li><em>1. Doctorate</em></li>
+<li><em>2. MSc</em></li>
+<li><em>3. Doctorate Presidential</em> </li>
+</ul>
+
+<pre><code class="r">sidebarPanel(
+    selectInput(&quot;Program&quot;, &quot;Choose a program:&quot;, 
+                choices = c(&quot;All&quot;, unique(as.character(studentData$Program))))
+  )
+</code></pre>
+
+</section>
+<section class='' data-state='' id='slide-5'>
+  <h2>Application</h2>
+  <p>The table, histogram and summary table update based on the user input</p>
+
+<p><img src="Doctorate.png" alt="with"></p>
+
+</section>
+<section class='' data-state='' id='slide-6'>
+  <h2>Details</h2>
+  <p>The code for the back-end of the table, histogram and summary table is provided below:</p>
+
+<pre><code class="r">output$table &lt;- DT::renderDataTable(DT::datatable(
+    {
+      data &lt;- studentData
+      if (input$Program != &quot;All&quot;)
+      {
+        data &lt;- studentData[studentData$Program == input$Program,]
+      }
+      data
+    }
+  ))
+
+  output$plot &lt;- renderPlot({
+    data &lt;- studentData
+    if (input$Program != &quot;All&quot;)
+    {
+      data &lt;- studentData[studentData$Program == input$Program,]
+    }
+    data
+    GPA &lt;- data$Final.GPA
+    hist(GPA)
+    })
+
+  output$summary &lt;- renderPrint({
+    data &lt;- studentData
+    if (input$Program != &quot;All&quot;)
+    {
+      data &lt;- studentData[studentData$Program == input$Program,]
+    }
+    data
+    summary(data$Final.GPA)
+  })
+</code></pre>
+
+<p>publish(title = &#39;StudentPortal2&#39;, &#39;index.html&#39;, host = &#39;rpubs&#39;)</p>
+
+</section>
+    </div>
+  </div>
+</body>
+  <script src="libraries/frameworks/Revealjs/lib/js/head.min.js"></script>
+  <script src="libraries/frameworks/Revealjs/js/reveal.min.js"></script>
+  <script>
+  // Full list of configuration options available here:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+    theme: Reveal.getQueryHash().theme || 'default', 
+    transition: Reveal.getQueryHash().transition || 'default', 
+    dependencies: [
+    // Cross-browser shim that fully implements classList -
+    // https://github.com/eligrey/classList.js/
+      { src: 'libraries/frameworks/Revealjs/lib/js/classList.js', condition: function() { return !document.body.classList;}},
+      // Zoom in and out with Alt+click
+      { src: 'libraries/frameworks/Revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      // Speaker notes
+      { src: 'libraries/frameworks/Revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+      // Remote control your reveal.js presentation using a touch device
+      //{ src: 'libraries/frameworks/Revealjs/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+      ]
+  });
+  </script>  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+<script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+<script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!-- DONE LOADING HIGHLIGHTER JS FILES -->
+ 
+
+</html>
