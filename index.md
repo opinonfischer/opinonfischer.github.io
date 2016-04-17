@@ -98,4 +98,3 @@ output$table <- DT::renderDataTable(DT::datatable(
   })
 ```
 
-publish(title = 'StudentPortal2', 'index.html', host = 'rpubs')
