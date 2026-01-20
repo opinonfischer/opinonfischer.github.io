@@ -1,0 +1,19 @@
+.pub-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #f8f8f8;
+  border-bottom: 2px solid #ddd;
+  padding: 0.8em 1em;
+  z-index: 1000;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em 1.5em;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+// Add margin to page content to account for fixed nav
+.archive {
+  margin-top: 60px;
+}

@@ -5,32 +5,52 @@ permalink: /publications/
 author_profile: true
 ---
 
-{% if site.author.googlescholar %}
-  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
-{% endif %}
+<!-- Navigation Bar -->
+<nav class="pub-nav">
+  <a href="#book_chapter">Book Chapters | </a>
+  <a href="#journal">Journal | </a>
+  <a href="#industry">Industry | </a>
+  <a href="#preprint">Preprints | </a>
+  <a href="#conference">Conference | </a>
+  <a href="#report">Reports | </a>
+  <a href="#magazine">Magazine Articles | </a>
+  <a href="#thesis">Theses </a>
 
-{% include base_path %}
 
-<!-- New style rendering if publication categories are defined -->
-{% if site.publication_category %}
-  {% for category in site.publication_category  %}
-    {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
-      {% if post.category != category[0] %}
-        {% continue %}
-      {% endif %}
-      {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
-        {% assign title_shown = true %}
-      {% endunless %}
-      {% include archive-single.html %}
+
+</nav>
+
+{% assign pub_types = "book_chapter,journal,industry,preprint,conference,eport,magazine,thesis" | split: "," %}
+{% assign type_names = "Book Chapters, Journal Publications, Industry Papers, Preprints, Conference Proceedings, Reports, Magazine Articles, Theses" | split: "," %}
+
+{% for i in (0..5) %}
+  {% assign current_type = pub_types[i] %}
+  {% assign pubs = site.publications | where: "pub_type", current_type | sort: "date" | reverse %}
+  
+  {% if pubs.size > 0 %}
+    <h2 class="pub-section" id="{{ current_type }}">{{ type_names[i] }}</h2>
+    <ol class="pub-list" reversed>
+      {% for post in pubs %}
+        <li>{% include archive-single-publications.html %}</li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+{% endfor %}
+
+<!-- Publications without a type -->
+{% assign uncategorized = "" | split: "" %}
+{% for post in site.publications %}
+  {% unless post.pub_type %}
+    {% assign uncategorized = uncategorized | push: post %}
+  {% endunless %}
+{% endfor %}
+
+{% assign uncategorized = uncategorized | sort: "date" | reverse %}
+{% if uncategorized.size > 0 %}
+  <h2 class="pub-section" id="other">Other Publications</h2>
+  <ol class="pub-list" reversed>
+    {% for post in uncategorized %}
+      <li>{% include archive-single-publications.html %}</li>
     {% endfor %}
-  {% endfor %}
-{% else %}
-  {% for post in site.publications reversed %}
-    {% include archive-single.html %}
-  {% endfor %}
+  </ol>
 {% endif %}
-
-
-

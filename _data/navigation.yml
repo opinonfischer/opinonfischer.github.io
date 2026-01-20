@@ -14,9 +14,12 @@ main:
   - title: "Research"
     url: /research/ 
 
-  - title: "Invited Talks and Presentations"
+  - title: "Invited Talks"
     url: /talks/   
-    
+
+  - title: "Boards & Committees"
+    url: /boards-committees/
+
   #- title: "Portfolio"
   #  url: /portfolio/
         

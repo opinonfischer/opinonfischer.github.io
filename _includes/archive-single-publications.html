@@ -1,0 +1,21 @@
+{% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+
+<div class="pub-item">
+  <span class="pub-title">
+    {% if post.paperurl %}
+      <a href="{{ post.paperurl }}">{{ title }}</a>
+    {% else %}
+      {{ title }}
+    {% endif %}
+  </span>
+  {% if post.venue %}<em>{{ post.venue }}</em>{% endif %}{% if post.date %}, {{ post.date | date: "%Y" }}{% endif %}.
+  
+  {% if post.paperurl or post.slidesurl or post.codeurl or post.repository %}
+    <span class="pub-links">
+      {% if post.paperurl %} [<a href="{{ post.paperurl }}">PDF</a>]{% endif %}
+      {% if post.slidesurl %} [<a href="{{ post.slidesurl }}">Slides</a>]{% endif %}
+      {% if post.codeurl %} [<a href="{{ post.codeurl }}">Code</a>]{% endif %}
+      {% if post.repository %} [<a href="{{ post.repository }}">GitHub</a>]{% endif %}
+    </span>
+  {% endif %}
+</div>
