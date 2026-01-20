@@ -9,10 +9,10 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "air" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
-title                    : "Olivia J. Pinon Fischer / Digital Engineering"
+title                    : "About"
 title_separator          : "-"
 name                     : &name "Olivia J. Fischer"
-description              : &description "Your Name's academic portfolio"   # Update this with a general description of your site, this is the default if not overridden by a page
+description              : &description "Olivia Fischer | Digital Engineering"   # Update this with a general description of your site, this is the default if not overridden by a page
 url                      : https://opinonfischer.github.io # The base hostname & protocol for your site e.g. "https://[your GitHub username].github.io",
                                                            # or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
@@ -24,12 +24,12 @@ repository               : "academicpages/academicpages.github.io"
 author:
   # Biographic information
   avatar           : "OliviaPinonFischer_GeorgiaTech.jpg"
-  name             : "Olivia J. Pinon Fischer"
+  name             : "Olivia J. Pinon Fischer, Ph.D."
   pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
+  bio              : "Principal Research Engineer | Chief, Digital Engineering Division | School of Aerospace Engineering"
   location         : "Atlanta, GA, USA"
   employer         : "Georgia Institute of Technology"
-  uri              : # URL
+  #uri              : # URL
   email            : "olivia dot pinon at ae dot gatech dot edu" # Email address (will be obfuscated to prevent spam)
 
   # Academic websites
@@ -38,7 +38,7 @@ author:
   googlescholar    : "https://scholar.google.com/citations?user=rc-60LMAAAAJ&hl=en"
   #inspire-hep      : # URL
   #impactstory      : # URL
-  orcid            : "https://orcid.org/0000-0002-2233-1391"
+  #orcid            : "https://orcid.org/0000-0002-2233-1391"
   #semantic         : # URL
   #ssrn             : # URL
   #pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
@@ -66,7 +66,7 @@ author:
   #keybase          : # Username
   #instagram        : # Username
   #lastfm           : # Username
-  linkedin         : # oliviapinonfischer
+  linkedin         :  oliviapinonfischer
   #mastodon         : # URL
   #medium           : # URL
   #pinterest        : # Username
